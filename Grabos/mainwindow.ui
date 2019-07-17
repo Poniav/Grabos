@@ -15,27 +15,34 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
-     <widget class="QLabel" name="label_TitreFichier">
+    <item row="2" column="0" colspan="2">
+     <widget class="QPlainTextEdit" name="plainTextEdit"/>
+    </item>
+    <item row="3" column="1">
+     <widget class="QPushButton" name="pushButton_Quitter">
       <property name="text">
-       <string> Edition de votre fichier :</string>
+       <string>Quitter</string>
       </property>
      </widget>
     </item>
-    <item row="1" column="0" colspan="2">
-     <widget class="QPlainTextEdit" name="plainTextEdit"/>
+    <item row="1" column="0">
+     <widget class="QLabel" name="label_TitreFichier">
+      <property name="text">
+       <string> Edition de votre fichier </string>
+      </property>
+     </widget>
     </item>
-    <item row="2" column="0">
+    <item row="3" column="0">
      <widget class="QPushButton" name="pushButton_Save">
       <property name="text">
        <string>Sauvegarder</string>
       </property>
      </widget>
     </item>
-    <item row="2" column="1">
-     <widget class="QPushButton" name="pushButton_Quitter">
+    <item row="1" column="1">
+     <widget class="QPushButton" name="pushButton">
       <property name="text">
-       <string>Quitter</string>
+       <string>Ouvrir un fichier</string>
       </property>
      </widget>
     </item>
