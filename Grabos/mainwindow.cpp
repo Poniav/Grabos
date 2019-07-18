@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowTitle("Grabos");
+    ui->pushButton_Save->setDisabled(true);
 
     connect(ui->pushButton_Quitter, SIGNAL(clicked()), this, SLOT(close()));
     connect(ui->actionQuitter, SIGNAL(triggered()), this, SLOT(close()));
@@ -20,6 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionOuvrir, SIGNAL(triggered()), this, SLOT(getFile()));
     connect(ui->pushButton_Save, SIGNAL(clicked()), this, SLOT(saveFileOpen()));
     connect(ui->pushButton_Quitter, SIGNAL(clicked()), this, SLOT(closeFileOpened()));
+    connect(ui->pushButton_Open, SIGNAL(clicked()), this, SLOT(getFile()));
 }
 
 MainWindow::~MainWindow()
@@ -27,11 +29,6 @@ MainWindow::~MainWindow()
     delete fwindow;
     delete ui;
 }
-
-//void MainWindow::closeWindow()
-//{
-//    close();
-//}
 
 ///
 /// \brief MainWindow::openAction
@@ -43,6 +40,9 @@ void MainWindow::openAction()
     fwindow->show();
 }
 
+///
+/// \brief MainWindow::getFile
+///
 void MainWindow::getFile()
 {
     QString fileName = QFileDialog::getOpenFileName(this, QString("Ouvrir un fichier"), QDir::homePath(), "Les fichiers (*.txt)");
