@@ -21,12 +21,14 @@ private slots:
     void getFile();
     void closeFileOpened();
     void saveFileOpen();
+    void compareText();
 private:
     Ui::MainWindow *ui;
     Dialog *fwindow;
     QString getFileName();
     void setFileName(QString File);
     QString fileName;
+    QString getFileContent(const QString &filename);
 };
 
 #endif // MAINWINDOW_H

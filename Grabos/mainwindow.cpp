@@ -6,6 +6,9 @@
 #include <QDir>
 #include <QFile>
 #include <QMessageBox>
+#include <string>
+
+using namespace std;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -22,12 +25,35 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->pushButton_Save, SIGNAL(clicked()), this, SLOT(saveFileOpen()));
     connect(ui->pushButton_Quitter, SIGNAL(clicked()), this, SLOT(closeFileOpened()));
     connect(ui->pushButton_Open, SIGNAL(clicked()), this, SLOT(getFile()));
+    connect(ui->plainTextEdit, SIGNAL(textChanged()), this, SLOT(compareText()));
 }
 
 MainWindow::~MainWindow()
 {
     delete fwindow;
     delete ui;
+}
+
+///
+/// \brief MainWindow::compareText
+///
+void MainWindow::compareText()
+{
+
+        QString cText = ui->plainTextEdit->toPlainText();
+
+        if(!this->getFileName().isEmpty())
+        {
+             QString fileC = getFileContent(this->getFileName());
+
+             if(cText != fileC)
+             {
+                 ui->pushButton_Save->setDisabled(false);
+             } else {
+                 ui->pushButton_Save->setDisabled(true);
+             }
+
+        }
 }
 
 ///
@@ -38,6 +64,29 @@ void MainWindow::openAction()
     fwindow = new Dialog(this);
     fwindow->setWindowTitle("A propos");
     fwindow->show();
+}
+
+///
+/// \brief MainWindow::getFileContent
+/// \param filename
+/// \return QString
+///
+QString MainWindow::getFileContent(QString const &filename)
+{
+    QFile file(filename);
+
+    QString content;
+
+    if(file.exists())
+    {
+        if(file.open(QIODevice::ReadOnly))
+        {
+            content = file.readAll();
+            file.close();
+        }
+    }
+
+    return content;
 }
 
 ///
@@ -60,13 +109,16 @@ void MainWindow::getFile()
         }
     }
 
-    if(!file.exists())
-    {
-        QMessageBox notif(this);
-        notif.setText("Le fichier n'existe pas");
-    }
+//    if(!file.exists())
+//    {
+//        QMessageBox notif(this);
+//        notif.setText("Le fichier n'existe pas");
+//    }
 }
 
+///
+/// \brief MainWindow::saveFileOpen
+///
 void MainWindow::saveFileOpen()
 {
     QString fileName = QFileDialog::getSaveFileName(this, QString("Sauvegarder le fichier"), QDir::homePath(), "Les fichiers (*.txt)");
@@ -82,6 +134,9 @@ void MainWindow::saveFileOpen()
 
 }
 
+///
+/// \brief MainWindow::closeFileOpened
+///
 void MainWindow::closeFileOpened()
 {
     ui->plainTextEdit->clear();
