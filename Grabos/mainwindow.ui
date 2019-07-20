@@ -54,7 +54,7 @@
      <x>0</x>
      <y>0</y>
      <width>573</width>
-     <height>22</height>
+     <height>19</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFichier">
@@ -62,9 +62,11 @@
      <string>Fichier</string>
     </property>
     <addaction name="actionOuvrir"/>
+    <addaction name="actionCloseFile"/>
+    <addaction name="actionFichiersRecents"/>
+    <addaction name="separator"/>
     <addaction name="actionQuitter"/>
     <addaction name="separator"/>
-    <addaction name="actionFichiersRecents"/>
    </widget>
    <widget class="QMenu" name="menuAide">
     <property name="title">
@@ -102,6 +104,11 @@
   <action name="actionFichiersRecents">
    <property name="text">
     <string>Fichiers récents</string>
+   </property>
+  </action>
+  <action name="actionCloseFile">
+   <property name="text">
+    <string>Fermer le fichier</string>
    </property>
   </action>
  </widget>

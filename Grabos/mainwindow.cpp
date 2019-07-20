@@ -17,6 +17,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     this->setWindowTitle("Grabos");
     ui->pushButton_Save->setDisabled(true);
+    ui->actionCloseFile->setDisabled(true);
 
     connect(ui->pushButton_Quitter, SIGNAL(clicked()), this, SLOT(close()));
     connect(ui->actionQuitter, SIGNAL(triggered()), this, SLOT(close()));
@@ -26,6 +27,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->pushButton_Quitter, SIGNAL(clicked()), this, SLOT(closeFileOpened()));
     connect(ui->pushButton_Open, SIGNAL(clicked()), this, SLOT(getFile()));
     connect(ui->plainTextEdit, SIGNAL(textChanged()), this, SLOT(compareText()));
+    connect(ui->actionCloseFile, SIGNAL(triggered()), this, SLOT(closeFileOpened()));
 }
 
 MainWindow::~MainWindow()
@@ -109,6 +111,8 @@ void MainWindow::getFile()
         }
     }
 
+    ui->actionCloseFile->setDisabled(false);
+
 //    if(!file.exists())
 //    {
 //        QMessageBox notif(this);
@@ -127,7 +131,6 @@ void MainWindow::saveFileOpen()
 
     if (file.open(QIODevice::WriteOnly))
     {
-
     }
 
     qDebug() << this->fileName;
@@ -140,6 +143,8 @@ void MainWindow::saveFileOpen()
 void MainWindow::closeFileOpened()
 {
     ui->plainTextEdit->clear();
+    ui->actionCloseFile->setDisabled(true);
+    ui->pushButton_Save->setDisabled(true);
     this->setFileName("");
 }
 
