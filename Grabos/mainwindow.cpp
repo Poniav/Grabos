@@ -18,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
     this->setWindowTitle("Grabos");
     ui->pushButton_Save->setDisabled(true);
     ui->actionCloseFile->setDisabled(true);
+    ui->actionSauvegarder->setDisabled(true);
 
     connect(ui->pushButton_Quitter, SIGNAL(clicked()), this, SLOT(close()));
     connect(ui->actionQuitter, SIGNAL(triggered()), this, SLOT(close()));
@@ -28,6 +29,11 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->pushButton_Open, SIGNAL(clicked()), this, SLOT(getFile()));
     connect(ui->plainTextEdit, SIGNAL(textChanged()), this, SLOT(compareText()));
     connect(ui->actionCloseFile, SIGNAL(triggered()), this, SLOT(closeFileOpened()));
+
+
+    ui->menuFichiers_r_cents->addAction("test");
+    ui->menuFichiers_r_cents->addAction("test");
+    ui->menuFichiers_r_cents->addAction("test");
 }
 
 MainWindow::~MainWindow()
@@ -51,8 +57,10 @@ void MainWindow::compareText()
              if(cText != fileC)
              {
                  ui->pushButton_Save->setDisabled(false);
+                 ui->actionSauvegarder->setDisabled(false);
              } else {
                  ui->pushButton_Save->setDisabled(true);
+                 ui->actionSauvegarder->setDisabled(true);
              }
 
         }
